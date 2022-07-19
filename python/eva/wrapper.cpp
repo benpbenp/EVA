@@ -113,8 +113,7 @@ dict from strings to lists of numbers
   m.def("save", &saveToFile<SEALValuation>, SAVE_DOC_STRING, py::arg("obj"), py::arg("path"));
   m.def("save", &saveToFile<SEALPublic>, SAVE_DOC_STRING, py::arg("obj"), py::arg("path"));
   m.def("save", &saveToFile<SEALSecret>, SAVE_DOC_STRING, py::arg("obj"), py::arg("path"));
-  m.def("load", static_cast<KnownType (*)(const string&)>(&loadFromFile), R"DELIMITER(Load and deserialize a previously serialized EVA object from a file.
-
+  m.def("load", static_cast<KnownType (*)(const string&)>(&loadFromFile), R"DELIMITER(Load and deserialize a previously serialized EVA object from a file.")
 Parameters
 ----------
 path : str
@@ -123,6 +122,8 @@ path : str
 Returns
 -------
 An object of the same class as was previously serialized)DELIMITER", py::arg("path"));
+
+  m.def("loadFromString", static_cast<KnownType (*)(const string&)>(&loadFromString), R"DELIMITER(Load and deserialize a previously serialized EVA object from a string.)DELIMITER", py::arg("str"));
 
   // Multi-core
   m.def("set_num_threads", [](int num_threads) {
